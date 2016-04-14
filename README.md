@@ -1,15 +1,19 @@
-# package-boilerplate
-Basic frontend boilerplate
+# rx-cast-subject
+Unify next/error/end interface of subjects from different FRP libs.
+ 
+---
 
-### Stack
-* babel
-* webpack
-* eslint
-* karma -> mocha + chai + sinon
+### Installation
+```
+npm install --save rx-cast-subject
+```
 
-### Commands
-```
-npm start
-npm test
-npm run build
-```
+---
+
+### API
+#### `cast : Subject -> RxSubject`
+#### `Subject : new Rx.Subject | new Bacon.Bus | new KefirBus | mostSubject().subject`
+
+`cast(subject)` ensures that given subject has `onNext`, `onError` and `onCompleted` methods, as standard RxJS subject.
+
+Just like [bacon-cast](https://github.com/StreakYC/bacon-cast) or [kefir-cast](https://github.com/StreakYC/kefir-cast), this is intended for use by libraries which want to be able to accept streams from different sources, without diving into differences between them.
