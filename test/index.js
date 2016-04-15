@@ -24,21 +24,26 @@ describe("rx", () => {
   it("values", () => {
     const listener = sinon.spy();
     origin.subscribe(listener);
-    casted.onNext();
+    const { onNext } = casted;
+    onNext(42);
     assert.equal(listener.callCount, 1, "subscription does not work");
+    assert.isTrue(listener.calledWith(42), "params in listener are wrong");
   });
 
   it("errors", () => {
     const listener = sinon.spy();
     origin.subscribe(undefined, listener);
-    casted.onError();
+    const { onError } = casted;
+    onError(42);
     assert.equal(listener.callCount, 1, "subscription does not work");
+    assert.isTrue(listener.calledWith(42), "params in listener are wrong");
   });
 
   it("end", () => {
     const listener = sinon.spy();
     origin.subscribe(undefined, undefined, listener);
-    casted.onCompleted();
+    const { onCompleted } = casted;
+    onCompleted();
     assert.equal(listener.callCount, 1, "subscription does not work");
   });
 });
@@ -62,21 +67,26 @@ describe("bacon", () => {
   it("values", () => {
     const listener = sinon.spy();
     origin.onValue(listener);
-    casted.onNext();
+    const { onNext } = casted;
+    onNext(42);
     assert.equal(listener.callCount, 1, "subscription does not work");
+    assert.isTrue(listener.calledWith(42), "params in listener are wrong");
   });
 
   it("errors", () => {
     const listener = sinon.spy();
     origin.onError(listener);
-    casted.onError();
+    const { onError } = casted;
+    onError(42);
     assert.equal(listener.callCount, 1, "subscription does not work");
+    assert.isTrue(listener.calledWith(42), "params in listener are wrong");
   });
 
   it("end", () => {
     const listener = sinon.spy();
     origin.onEnd(listener);
-    casted.onCompleted();
+    const { onCompleted } = casted;
+    onCompleted();
     assert.equal(listener.callCount, 1, "subscription does not work");
   });
 });
@@ -99,21 +109,26 @@ describe("kefir", () => {
   it("values", () => {
     const listener = sinon.spy();
     origin.onValue(listener);
-    casted.onNext();
+    const { onNext } = casted;
+    onNext(42);
     assert.equal(listener.callCount, 1, "subscription does not work");
+    assert.isTrue(listener.calledWith(42), "params in listener are wrong");
   });
 
   it("errors", () => {
     const listener = sinon.spy();
     origin.onError(listener);
-    casted.onError();
+    const { onError } = casted;
+    onError(42);
     assert.equal(listener.callCount, 1, "subscription does not work");
+    assert.isTrue(listener.calledWith(42), "params in listener are wrong");
   });
 
   it("end", () => {
     const listener = sinon.spy();
     origin.onEnd(listener);
-    casted.onCompleted();
+    const { onCompleted } = casted;
+    onCompleted();
     assert.equal(listener.callCount, 1, "subscription does not work");
   });
 });
@@ -137,15 +152,19 @@ describe("most", () => {
   it("values", () => {
     const listener = sinon.spy();
     origin.observe(listener);
-    casted.onNext();
+    const { onNext } = casted;
+    onNext(42);
     assert.equal(listener.callCount, 1, "subscription does not work");
+    assert.isTrue(listener.calledWith(42), "params in listener are wrong");
   });
 
   it("errors", () => {
     const listener = sinon.spy(() => most.of(42));
     origin.recoverWith(listener).drain();
-    casted.onError(42);
+    const { onError } = casted;
+    onError(42);
     assert.equal(listener.callCount, 1, "subscription does not work");
+    assert.isTrue(listener.calledWith(42), "params in listener are wrong");
   });
 
   it("end", () => {
