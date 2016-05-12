@@ -2,7 +2,9 @@ function cast(subject, mapping, bind = false) {
   const casted = Object.create(subject);
   for (const key in mapping) {
     const alias = mapping[key];
-    casted[key] = !bind ? subject[alias] : (...args) => subject[alias](...args);
+    const fn = !bind ? subject[alias] : (...args) => subject[alias](...args);
+    casted[key] = fn;
+    casted[key.slice(2).toLowerCase()] = fn;
   }
   return casted;
 }

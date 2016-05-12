@@ -14,7 +14,7 @@ npm install --save rx-cast-subject
 #### `cast : Subject -> RxSubject`
 #### `Subject : new Rx.Subject | new Bacon.Bus | new KefirBus | mostSubject().subject`
 
-`cast(subject)` ensures that given subject has `onNext`, `onError` and `onCompleted` methods, as standard RxJS subject.
+`cast(subject)` ensures that given subject has `onNext`, `onError`, `onCompleted` (and `next`, `error`, `completed`) methods, as standard RxJS subject.
 
 Additionally, it ensures all that methods are bound to subject context, so you can safely do `<div onClick={subject.onNext} />`.
 `kefir` and `most` do this themselves, `rx` and `bacon` are not.
