@@ -18,7 +18,7 @@ const libs = {
   },
 
   bacon: {
-    is: $ => $.push && $.error && $.end && $.plug,
+    is: $ => $.push && $.error && $.end,
     cast: $ => cast($, {
       onNext: "push",
       onError: "error",
@@ -27,7 +27,7 @@ const libs = {
   },
 
   kefir: {
-    is: $ => $.emit && $.error && $.end && $.plug,
+    is: $ => $.emit && $.error && $.end,
     cast: $ => cast($, {
       onNext: "emit",
       onError: "error",
