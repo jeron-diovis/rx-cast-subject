@@ -17,6 +17,10 @@
     "type": "git",
     "url": "https://github.com/jeron-diovis/rx-cast-subject"
   },
+  "files": [
+    "lib",
+    "dist"
+  ],
   "scripts": {
     "test": "karma start",
     "test:watch": "npm test -- --single-run=false",
